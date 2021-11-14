@@ -25,7 +25,12 @@ class StationController extends Controller
             $Station->company = Company::where(['id' => $Station->company_id])->first();
             $_s[] = $Station;
         }
-        return response([ 'stations' => $_s, 'message' => 'Retrieved successfully'], 200);
+        //return response([ 'stations' => $_s, 'message' => 'Retrieved successfully'], 200);
+        return response()->json([
+            'status' => 200,
+            'stations' => $_s,
+            'message' => 'Retrieved successfully'
+        ]);
     }
 
     /**
@@ -36,7 +41,6 @@ class StationController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $data = $request->all();
 
         $validator = Validator::make($data, [
